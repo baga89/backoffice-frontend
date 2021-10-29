@@ -1,0 +1,33 @@
+$primary: #6002ee;
+
+@import '~bootstrap/scss/bootstrap';
+
+.modal-header {
+  align-items: flex-start;
+}
+
+.thead-primary th {
+  background-color: var(--primary);
+  color: #fff;
+}
+
+.dropdown-menu {
+  min-width: 0;
+  font-size: 14px;
+}
+
+.dropdown-item.active,
+.dropdown-item:active {
+  color: var(--primary);
+  text-decoration: none;
+  background-color: var(--bs-gray-200);
+}
+
+.dropdown-item:hover,
+.dropdown-item:focus {
+  color: var(--bs-gray-900);
+  background-color: var(--bs-gray-200);
+}
+
+// https://react-bootstrap.github.io/getting-started/introduction/
+// https://getbootstrap.com/docs/5.0/customize/sass/
