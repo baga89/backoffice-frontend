@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useHistory, useLocation, Link } from 'react-router-dom';
 
 import { toast } from 'react-toastify';
-import { Alert, Button, Modal } from 'react-bootstrap';
+import { Alert, Button, Card, Modal, Row, Col } from 'react-bootstrap';
 import { PencilSquare, Trash, Plus } from 'react-bootstrap-icons';
 
 import { getUsers, deleteUser } from '../../services/userService';
@@ -65,51 +65,60 @@ const UsersPage = (props) => {
   return (
     <>
       <h1 className='mb-4'>Registrirani korisnici</h1>
-      <Link to={props.location.pathname + '/new'}>
-        <Button variant='primary' size='lg' className='mb-4'>
-          Dodaj korisnika
-          <Plus className='ms-2' size={24} />
-        </Button>
-      </Link>
-      <table className='table table-striped'>
-        <thead className='table-secondary'>
-          <tr>
-            <th scope='col'>#</th>
-            <th scope='col'>Ime</th>
-            <th scope='col'>Prezime</th>
-            <th scope='col'>Email</th>
-            <th scope='col'>Rola</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          {users &&
-            users.map((user, index) => (
-              <tr key={index}>
-                <th scope='row'>{index + 1}</th>
-                <td>{user.firstName}</td>
-                <td>{user.lastName}</td>
-                <td>{user.email}</td>
-                <td>{user.role}</td>
-                <td>
-                  <button className='btn-transparent me-3'>
-                    <PencilSquare size={20} onClick={() => handleEdit(user._id)} />
-                  </button>
-                  <button className='btn-transparent'>
-                    <Trash
-                      size={20}
-                      onClick={() => {
-                        openModal();
-                        setUserToDelete(user);
-                      }}
-                      className='me-3 text-danger'
-                    />
-                  </button>
-                </td>
-              </tr>
-            ))}
-        </tbody>
-      </table>
+      <Card>
+        <Card.Header as='h5'>
+          <Row className='align-items-center'>
+            <Col>Korisnici</Col>
+            <Col className='col-auto'>
+              <Link to={props.location.pathname + '/new'}>
+                <Button variant='primary'>
+                  Dodaj korisnika
+                  <Plus className='ms-2' size={24} />
+                </Button>
+              </Link>
+            </Col>
+          </Row>
+        </Card.Header>
+        <table className='table'>
+          <thead className='table-light'>
+            <tr>
+              <th scope='col'>#</th>
+              <th scope='col'>Ime</th>
+              <th scope='col'>Prezime</th>
+              <th scope='col'>Email</th>
+              <th scope='col'>Rola</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {users &&
+              users.map((user, index) => (
+                <tr key={index}>
+                  <th scope='row'>{index + 1}</th>
+                  <td>{user.firstName}</td>
+                  <td>{user.lastName}</td>
+                  <td>{user.email}</td>
+                  <td>{user.role}</td>
+                  <td>
+                    <button className='btn-transparent me-3'>
+                      <PencilSquare size={20} onClick={() => handleEdit(user._id)} />
+                    </button>
+                    <button className='btn-transparent'>
+                      <Trash
+                        size={20}
+                        onClick={() => {
+                          openModal();
+                          setUserToDelete(user);
+                        }}
+                        className='me-3 text-danger'
+                      />
+                    </button>
+                  </td>
+                </tr>
+              ))}
+          </tbody>
+        </table>
+      </Card>
       <Modal show={modalIsOpen} onHide={closeModal} backdrop='static'>
         <Modal.Header className='border-bottom-0' closeButton>
           <Modal.Title>

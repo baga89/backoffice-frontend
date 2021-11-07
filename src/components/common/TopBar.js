@@ -2,6 +2,7 @@ import React, { useState, useEffect, forwardRef } from 'react';
 import { Dropdown, Spinner } from 'react-bootstrap';
 import { List, PersonFill, BoxArrowRight } from 'react-bootstrap-icons';
 import { toast } from 'react-toastify';
+import { Link } from 'react-router-dom';
 import { useAuth } from '../../services/useAuth';
 
 const CustomToggle = forwardRef(({ children, onClick }, ref) => (
@@ -19,30 +20,12 @@ const CustomToggle = forwardRef(({ children, onClick }, ref) => (
 ));
 
 export default function TopBar() {
-  const [loading, setLoading] = useState(false);
-
-  const auth = useAuth();
-
-  const fetchUser = async () => {
-    setLoading(true);
-    try {
-      await auth.getCurrentUser();
-    } catch (error) {
-      error.response && toast.error('Nije moguće dohvatiti podatke od korisnika');
-      console.log(error.response);
-    } finally {
-      setLoading(false);
-    }
-  };
+  const { loading, error, user, logout } = useAuth();
 
   const handleLogout = () => {
-    auth.logout();
+    logout();
     toast('Uspješno ste odjavljeni');
   };
-
-  useEffect(() => {
-    fetchUser();
-  }, []);
 
   return (
     <div className='top-bar'>
@@ -52,16 +35,20 @@ export default function TopBar() {
 
       <Dropdown className='user-profile' autoClose='outside'>
         <Dropdown.Toggle as={CustomToggle}>
+          {error && 'Korisnik nije učitan'}
           {loading ? (
             <Spinner animation='border' size='sm' />
           ) : (
             <>
-              <PersonFill size={24} className='me-2 text-primary' /> {auth.user.firstName} {auth.user.lastName}
+              <PersonFill size={24} className='me-2 text-primary' /> {user && user.firstName} {user && user.lastName}
             </>
           )}
         </Dropdown.Toggle>
 
-        <Dropdown.Menu align='end' className='w-100 rounded-0 mt-2'>
+        <Dropdown.Menu align='end' className='w-100 rounded-0'>
+          <Dropdown.Item as={Link} to='/profile'>
+            Moj profil
+          </Dropdown.Item>
           <Dropdown.Item onClick={handleLogout}>
             <BoxArrowRight size={18} className='me-2 text-primary' />
             Odjavi se

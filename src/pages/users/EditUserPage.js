@@ -2,26 +2,24 @@ import React, { useState, useEffect } from 'react';
 import { Alert, Button } from 'react-bootstrap';
 import { ArrowLeftShort } from 'react-bootstrap-icons';
 import { toast } from 'react-toastify';
-import { format, parseISO } from 'date-fns';
 
-import { getOffice, updateOffice } from '../../services/officeService';
-import { OfficeForm } from './OfficeForm';
+import { getUser, updateUser } from '../../services/userService';
+import { UserForm } from './UserForm';
 import Spinner from '../../components/common/Spinner';
 
-const EditOfficePage = (props) => {
-  const [office, setOffice] = useState({});
+const EditUserPage = (props) => {
+  const [user, setUser] = useState({});
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const [submitLoading, setSubmitLoading] = useState(false);
 
-  let { id: officeID } = props.match.params;
+  let { id: userID } = props.match.params;
 
-  const fetchOffice = async (officeID) => {
+  const fetchUser = async (userID) => {
     setLoading(true);
     try {
-      const office = await getOffice(officeID);
-      // office.obligationsFrom = office.obligationsFrom.substring(0, 10);
-      setOffice(office);
+      const user = await getUser(userID);
+      setUser(user);
     } catch (error) {
       error.response && setError(error.response.data);
       console.log(error.response);
@@ -31,22 +29,21 @@ const EditOfficePage = (props) => {
   };
 
   useEffect(() => {
-    fetchOffice(officeID);
-  }, [officeID]);
+    fetchUser(userID);
+  }, [userID]);
 
-  const onSubmit = async (formData) => {
+  const onSubmit = async ({ firstName, lastName, email, password }) => {
     setSubmitLoading(true);
+    setError(null);
     try {
-      const updatedOffice = await updateOffice(officeID, formData);
-      setOffice(updatedOffice);
-
-      // setOffice((office) => {
-      //   return { ...office, ...updatedOffice };
-      // });
-
-      // setOffice({ ...office, ...updatedOffice });
-
-      toast.success(`Poslovnica ${updatedOffice.number} je uspješno ažurirana.`);
+      const updatedUser = await updateUser(userID, {
+        firstName,
+        lastName,
+        email,
+        password: password ? password : undefined,
+      });
+      setUser(updatedUser);
+      toast.success(`Korisnik ${updatedUser.firstName} je uspješno ažuriran.`);
     } catch (error) {
       error.response && setError(error.response.data);
       console.log(error.response);
@@ -63,11 +60,16 @@ const EditOfficePage = (props) => {
         <ArrowLeftShort className='me-2' size={24} />
         Idi nazad
       </Button>
-      <h2 className='mb-4 text-primary'>Uredi poslovnicu {office && office.place}</h2>
+      <h2 className='mb-4 text-primary'>Uredi korisnika {user && user.firstName}</h2>
       {error && <Alert variant='danger'>{error}</Alert>}
-      <OfficeForm defaultValues={office} onSubmit={onSubmit} submitLoading={submitLoading} />
+      <UserForm
+        defaultValues={user}
+        onSubmit={onSubmit}
+        submitLoading={submitLoading}
+        location={props.location.pathname}
+      />
     </div>
   );
 };
 
-export default EditOfficePage;
+export default EditUserPage;

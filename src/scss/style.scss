@@ -35,7 +35,7 @@
   --gray700: #37343b;
   --gray800: #2f2c33;
   --gray900: #1f1e22;
-  --gray-border: rgba(0, 0, 0, 0.12);
+  --gray-border: var(--bs-gray-200);
 }
 
 body {
@@ -75,7 +75,7 @@ header {
   display: flex;
   flex-direction: column;
   border-right: 1px solid var(--gray-border);
-  background-color: #fff;
+  background-color: var(--bs-dark);
 }
 
 /* Logo
@@ -85,7 +85,6 @@ header {
   align-items: center;
   padding-left: 16px;
   padding-right: 16px;
-  width: calc(100% + 1px);
   height: 60px;
   background-color: var(--primary);
 }
@@ -117,7 +116,7 @@ header {
   display: block;
   padding: 14px 16px;
   border-radius: 8px;
-  color: var(--secondary);
+  color: var(--primary100);
   font-size: 16px;
   font-weight: 400;
   transition: all 0.4s;
@@ -163,9 +162,9 @@ header {
   height: 100%;
   border: 1px solid var(--gray-border);
   border-width: 0 1px;
-  background-color: var(--light);
+  background-color: var(--bs-light);
   font-size: 14px;
-  color: var(--gray400);
+  color: var(--bs-gray-600);
   transition: color 0.4s;
 }
 
@@ -179,7 +178,7 @@ header {
 main {
   grid-area: main;
   padding: 24px;
-  background-color: #fff;
+  background-color: var(--bs-light);
   overflow-y: auto;
 }
 
@@ -198,6 +197,10 @@ footer {
 .btn-transparent {
   border: 0;
   background: transparent;
+}
+
+.grid-template-columns-2 {
+  grid-template-columns: repeat(2, 1fr);
 }
 
 // Spinner
