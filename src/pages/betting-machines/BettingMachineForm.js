@@ -166,11 +166,11 @@ export const BettingMachineForm = ({ defaultValues, submitLoading, onSubmit }) =
         </Form.Group>
       </Row>
       <Row className='mb-5'>
-        <Form.Group className='col-6' controlId='feeWithVat'>
+        <Form.Group className='col-6 mb-3' controlId='feeWithVat'>
           <Form.Label>Naknada s PDV-om</Form.Label>
           <Form.Control type='text' {...register('feeWithVat')} />
         </Form.Group>
-        <Form.Group className='col-6' controlId='rent'>
+        <Form.Group className='col-6 mb-3' controlId='rent'>
           <Form.Label>Zakupnina</Form.Label>
           <Form.Control type='number' {...register('rent')} />
         </Form.Group>
