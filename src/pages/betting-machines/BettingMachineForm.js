@@ -69,19 +69,19 @@ export const BettingMachineForm = ({ defaultValues, submitLoading, onSubmit }) =
           />
           <Form.Control.Feedback type='invalid'>{errors.street?.message}</Form.Control.Feedback>
         </Form.Group>
-        <Form.Group className='col-6' controlId='spaceName'>
+        <Form.Group className='col-6 mb-3' controlId='spaceName'>
           <Form.Label>Naziv</Form.Label>
           <Form.Control type='text' {...register('spaceName')} />
         </Form.Group>
-        <Form.Group className='col-6' controlId='caffeBar'>
+        <Form.Group className='col-6 mb-3' controlId='caffeBar'>
           <Form.Label>Caffe bar</Form.Label>
           <Form.Control type='text' {...register('caffeBar')} />
         </Form.Group>
-        <Form.Group className='col-6' controlId='owner'>
+        <Form.Group className='col-6 mb-3' controlId='owner'>
           <Form.Label>Vlasnik</Form.Label>
           <Form.Control type='text' {...register('owner')} />
         </Form.Group>
-        <Form.Group className='col-6' controlId='decisionMonth'>
+        <Form.Group className='col-6 mb-3' controlId='decisionMonth'>
           <Form.Label>Mjesec rješenja</Form.Label>
           <Form.Control type='date' {...register('decisionMonth')} />
         </Form.Group>

@@ -84,8 +84,6 @@ const BettingMachinesPage = (props) => {
               <th scope='col'>Oznaka lokacije</th>
               <th scope='col'>Mjesto</th>
               <th scope='col'>Ulica</th>
-              <th scope='col'>Naziv</th>
-              <th scope='col'>Caffe bar</th>
               <th></th>
             </tr>
           </thead>
@@ -98,8 +96,6 @@ const BettingMachinesPage = (props) => {
                   <td>{bettingMachine.locationTag}</td>
                   <td>{bettingMachine.place}</td>
                   <td>{bettingMachine.street}</td>
-                  <td>{bettingMachine.spaceName}</td>
-                  <td>{bettingMachine.caffeBar}</td>
                   <td>
                     <button className='btn-transparent me-3'>
                       <PencilSquare size={20} onClick={() => handleEdit(bettingMachine._id)} />
