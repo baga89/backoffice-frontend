@@ -10,6 +10,9 @@ import ProtectedRoute from './components/common/ProtectedRoute';
 import OfficesPage from './pages/offices/OfficesPage';
 import NewOfficePage from './pages/offices/NewOfficePage';
 import EditOfficePage from './pages/offices/EditOfficePage';
+import BettingMachinesPage from './pages/betting-machines/BettingMachinesPage';
+import NewBettingMachinePage from './pages/betting-machines/NewBettingMachinePage';
+import EditBettingMachinePage from './pages/betting-machines/EditBettingMachinePage';
 import DashboardPage from './pages/dashboard/DashboardPage';
 import UsersPage from './pages/users/UsersPage';
 import NewUserPage from './pages/users/NewUserPage';
@@ -27,6 +30,9 @@ export default function App() {
           <ProtectedRoute path='/offices/:id/edit' component={EditOfficePage} />
           <ProtectedRoute path='/offices/new' component={NewOfficePage} />
           <ProtectedRoute path='/offices' component={OfficesPage} />
+          <ProtectedRoute path='/betting-machines/:id/edit' component={EditBettingMachinePage} />
+          <ProtectedRoute path='/betting-machines/new' component={NewBettingMachinePage} />
+          <ProtectedRoute path='/betting-machines' component={BettingMachinesPage} />
           <ProtectedRoute path='/users/:id/edit' component={EditUserPage} />
           <ProtectedRoute path='/users/new' component={NewUserPage} />
           <ProtectedRoute path='/users' component={UsersPage} />

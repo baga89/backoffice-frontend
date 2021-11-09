@@ -27,6 +27,11 @@ export default function Header() {
             </NavLink>
           </li>
           <li className='main-nav__item'>
+            <NavLink to='/betting-machines' activeStyle={activeStyle} className='main-nav__link'>
+              Kladomati
+            </NavLink>
+          </li>
+          <li className='main-nav__item'>
             <NavLink to='/users' activeStyle={activeStyle} className='main-nav__link'>
               Korisnici
             </NavLink>

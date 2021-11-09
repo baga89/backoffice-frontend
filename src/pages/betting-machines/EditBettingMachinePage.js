@@ -3,24 +3,23 @@ import { Alert, Button } from 'react-bootstrap';
 import { ArrowLeftShort } from 'react-bootstrap-icons';
 import { toast } from 'react-toastify';
 
-import { getOffice, updateOffice } from '../../services/officeService';
-import { OfficeForm } from './OfficeForm';
+import { getBettingMachine, updateBettingMachine } from '../../services/bettingMachineService';
+import { BettingMachineForm } from './BettingMachineForm';
 import Spinner from '../../components/common/Spinner';
 
-const EditOfficePage = (props) => {
-  const [office, setOffice] = useState({});
+const EditBettingMachinePage = (props) => {
+  const [bettingMachine, setBettingMachine] = useState({});
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const [submitLoading, setSubmitLoading] = useState(false);
 
-  let { id: officeID } = props.match.params;
+  let { id: bettingMachineID } = props.match.params;
 
-  const fetchOffice = async (officeID) => {
+  const fetchBettingMachine = async (bettingMachineID) => {
     setLoading(true);
     try {
-      const office = await getOffice(officeID);
-      // office.obligationsFrom = office.obligationsFrom.substring(0, 10);
-      setOffice(office);
+      const bettingMachine = await getBettingMachine(bettingMachineID);
+      setBettingMachine(bettingMachine);
     } catch (error) {
       error.response && setError(error.response.data);
       console.log(error.response);
@@ -30,22 +29,16 @@ const EditOfficePage = (props) => {
   };
 
   useEffect(() => {
-    fetchOffice(officeID);
-  }, [officeID]);
+    fetchBettingMachine(bettingMachineID);
+  }, [bettingMachineID]);
 
   const onSubmit = async (formData) => {
     setSubmitLoading(true);
     try {
-      const updatedOffice = await updateOffice(officeID, formData);
-      setOffice(updatedOffice);
+      const updatedBettingMachine = await updateBettingMachine(bettingMachineID, formData);
+      setBettingMachine(updatedBettingMachine);
 
-      // setOffice((office) => {
-      //   return { ...office, ...updatedOffice };
-      // });
-
-      // setOffice({ ...office, ...updatedOffice });
-
-      toast.success(`Poslovnica ${updatedOffice.number} je uspješno ažurirana.`);
+      toast.success(`Kladomat ${updatedBettingMachine.number} je uspješno ažuriran.`);
     } catch (error) {
       error.response && setError(error.response.data);
       console.log(error.response);
@@ -62,11 +55,11 @@ const EditOfficePage = (props) => {
         <ArrowLeftShort className='me-2' size={24} />
         Idi nazad
       </Button>
-      <h2 className='mb-4 text-primary'>Uredi poslovnicu {office && office.place}</h2>
+      <h2 className='mb-4 text-primary'>Uredi kladomat {bettingMachine && bettingMachine.place}</h2>
       {error && <Alert variant='danger'>{error}</Alert>}
-      <OfficeForm defaultValues={office} onSubmit={onSubmit} submitLoading={submitLoading} />
+      <BettingMachineForm defaultValues={bettingMachine} onSubmit={onSubmit} submitLoading={submitLoading} />
     </div>
   );
 };
 
-export default EditOfficePage;
+export default EditBettingMachinePage;
