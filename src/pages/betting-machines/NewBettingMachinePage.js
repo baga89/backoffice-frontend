@@ -10,10 +10,10 @@ const NewBettingMachinePage = (props) => {
   const [error, setError] = useState(null);
   const [submitLoading, setSubmitLoading] = useState(false);
 
-  const onSubmit = async ({ number, locationTag, place, street }) => {
+  const onSubmit = async (formData) => {
     setSubmitLoading(true);
     try {
-      const bettingMachine = await addBettingMachine({ number, locationTag, place, street });
+      const bettingMachine = await addBettingMachine(formData);
       props.history.push('/betting-machines');
       toast.success(`Kladomat ${bettingMachine.number} je uspješno dodan.`);
     } catch (error) {

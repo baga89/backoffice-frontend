@@ -10,10 +10,10 @@ const NewOfficePage = (props) => {
   const [error, setError] = useState(null);
   const [submitLoading, setSubmitLoading] = useState(false);
 
-  const onSubmit = async ({ number, locationTag, place, street }) => {
+  const onSubmit = async (formData) => {
     setSubmitLoading(true);
     try {
-      const office = await addOffice({ number, locationTag, place, street });
+      const office = await addOffice(formData);
       props.history.push('/offices');
       toast.success(`Poslovnica ${office.number} je uspješno dodana.`);
     } catch (error) {
