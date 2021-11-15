@@ -16,6 +16,7 @@ export const OfficeForm = ({ defaultValues, submitLoading, onSubmit }) => {
       ? {
           ...defaultValues,
           openedAt: formatDate(defaultValues.openedAt),
+          closedAt: formatDate(defaultValues.closedAt),
           obligationsFrom: formatDate(defaultValues.obligationsFrom),
           dateOfAgreement: formatDate(defaultValues.dateOfAgreement),
         }
@@ -168,6 +169,10 @@ export const OfficeForm = ({ defaultValues, submitLoading, onSubmit }) => {
         <Form.Group className='col-12 mb-3' controlId='openedAt'>
           <Form.Label>Otvoreno od</Form.Label>
           <Form.Control type='date' {...register('openedAt')} />
+        </Form.Group>
+        <Form.Group className='col-12 mb-5' controlId='closedAt'>
+          <Form.Label>Zatvoreno od</Form.Label>
+          <Form.Control type='date' {...register('closedAt')} />
         </Form.Group>
         <Form.Group className='col-6 mb-3' controlId='applicationCommercialCourt'>
           <Card className='px-3 py-2'>
