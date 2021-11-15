@@ -17,6 +17,7 @@ export const BettingMachineForm = ({ defaultValues, submitLoading, onSubmit }) =
           ...defaultValues,
           decisionMonth: formatDate(defaultValues.decisionMonth),
           openedAt: formatDate(defaultValues.openedAt),
+          closedAt: formatDate(defaultValues.closedAt),
           obligationsFrom: formatDate(defaultValues.obligationsFrom),
           dateOfAgreement: formatDate(defaultValues.dateOfAgreement),
         }
@@ -138,9 +139,13 @@ export const BettingMachineForm = ({ defaultValues, submitLoading, onSubmit }) =
         </Form.Group>
       </Row>
       <Row className='mb-5'>
-        <Form.Group className='col-12' controlId='openedAt'>
+        <Form.Group className='col-12 mb-3' controlId='openedAt'>
           <Form.Label>Otvoreno od</Form.Label>
           <Form.Control type='date' {...register('openedAt')} />
+        </Form.Group>
+        <Form.Group className='col-12' controlId='closedAt'>
+          <Form.Label>Zatvoreno od</Form.Label>
+          <Form.Control type='date' {...register('closedAt')} />
         </Form.Group>
       </Row>
       <Row className='mb-5'>
