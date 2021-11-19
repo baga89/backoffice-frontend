@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { Alert, Button } from 'react-bootstrap';
+import { Alert, Button, Row, Col } from 'react-bootstrap';
 import { ArrowLeftShort } from 'react-bootstrap-icons';
 import { toast } from 'react-toastify';
 
 import { getOffice, updateOffice } from '../../services/officeService';
 import { OfficeForm } from './OfficeForm';
+import InfoCard from '../../components/InfoCard';
 import Spinner from '../../components/common/Spinner';
 
 const EditOfficePage = (props) => {
-  const [office, setOffice] = useState({});
+  const [office, setOffice] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const [submitLoading, setSubmitLoading] = useState(false);
@@ -19,7 +20,6 @@ const EditOfficePage = (props) => {
     setLoading(true);
     try {
       const office = await getOffice(officeID);
-      // office.obligationsFrom = office.obligationsFrom.substring(0, 10);
       setOffice(office);
     } catch (error) {
       error.response && setError(error.response.data);
@@ -38,13 +38,11 @@ const EditOfficePage = (props) => {
     try {
       const updatedOffice = await updateOffice(officeID, formData);
       setOffice(updatedOffice);
-
       // setOffice((office) => {
       //   return { ...office, ...updatedOffice };
       // });
 
       // setOffice({ ...office, ...updatedOffice });
-
       toast.success(`Poslovnica ${updatedOffice.number} je uspješno ažurirana.`);
     } catch (error) {
       error.response && setError(error.response.data);
@@ -57,15 +55,26 @@ const EditOfficePage = (props) => {
   if (loading) return <Spinner />;
 
   return (
-    <div className='fav-container'>
+    <>
       <Button onClick={props.history.goBack} variant='light' className='mb-4'>
         <ArrowLeftShort className='me-2' size={24} />
         Idi nazad
       </Button>
-      <h2 className='mb-4 text-primary'>Uredi poslovnicu {office && office.place}</h2>
       {error && <Alert variant='danger'>{error}</Alert>}
-      <OfficeForm defaultValues={office} onSubmit={onSubmit} submitLoading={submitLoading} />
-    </div>
+      {office && (
+        <>
+          <h2 className='mb-4 text-primary'>Uredi poslovnicu {office.place}</h2>
+          <Row>
+            <Col md='6'>
+              <OfficeForm defaultValues={office} onSubmit={onSubmit} submitLoading={submitLoading} />
+            </Col>
+            <Col md={{ span: 4, offset: 2 }}>
+              <InfoCard createdAt={office.createdAt} updatedAt={office.updatedAt} userFullName={office.userFullName} />
+            </Col>
+          </Row>
+        </>
+      )}
+    </>
   );
 };
 

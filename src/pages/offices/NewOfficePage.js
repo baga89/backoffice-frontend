@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Alert, Button } from 'react-bootstrap';
+import { Alert, Button, Row, Col } from 'react-bootstrap';
 import { ArrowLeftShort } from 'react-bootstrap-icons';
 import { toast } from 'react-toastify';
 
@@ -32,7 +32,11 @@ const NewOfficePage = (props) => {
       </Button>
       <h2 className='mb-4 text-primary'>Dodaj novu poslovnicu</h2>
       {error && <Alert variant='danger'>{error}</Alert>}
-      <OfficeForm onSubmit={onSubmit} submitLoading={submitLoading} />
+      <Row>
+        <Col md='6'>
+          <OfficeForm onSubmit={onSubmit} submitLoading={submitLoading} />
+        </Col>
+      </Row>
     </div>
   );
 };

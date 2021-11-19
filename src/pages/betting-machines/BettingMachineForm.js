@@ -25,7 +25,7 @@ export const BettingMachineForm = ({ defaultValues, submitLoading, onSubmit }) =
   });
 
   return (
-    <Form className='bettingMachine-form w-50' onSubmit={handleSubmit(onSubmit)} noValidate>
+    <Form className='bettingMachine-form' onSubmit={handleSubmit(onSubmit)} noValidate>
       <Row className='mb-5'>
         <Form.Group className='col-6 mb-3' controlId='number'>
           <Form.Label>Broj kladomata</Form.Label>

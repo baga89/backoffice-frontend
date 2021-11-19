@@ -28,7 +28,7 @@ export default function TopBar() {
   };
 
   return (
-    <div className='top-bar'>
+    <div className='top-bar fav-container'>
       <button className='btn-menu-trigger'>
         <List size={24} />
       </button>

@@ -1,10 +1,7 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { Button, Form, Row, Card, InputGroup, Spinner } from 'react-bootstrap';
-
-const formatDate = (ISOString) => {
-  if (ISOString) return ISOString.substring(0, 10);
-};
+import formatDate from '../../utils/helpers/formatDate';
 
 export const OfficeForm = ({ defaultValues, submitLoading, onSubmit }) => {
   const {
@@ -24,7 +21,7 @@ export const OfficeForm = ({ defaultValues, submitLoading, onSubmit }) => {
   });
 
   return (
-    <Form className='office-form w-50' onSubmit={handleSubmit(onSubmit)} noValidate>
+    <Form className='office-form' onSubmit={handleSubmit(onSubmit)} noValidate>
       <Row className='mb-5'>
         <Form.Group className='col-6 mb-3' controlId='number'>
           <Form.Label>Broj poslovnice</Form.Label>

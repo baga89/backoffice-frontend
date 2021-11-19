@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Alert, Button } from 'react-bootstrap';
+import { Alert, Button, Row, Col } from 'react-bootstrap';
 import { ArrowLeftShort } from 'react-bootstrap-icons';
 import { toast } from 'react-toastify';
 
 import { getBettingMachine, updateBettingMachine } from '../../services/bettingMachineService';
 import { BettingMachineForm } from './BettingMachineForm';
 import Spinner from '../../components/common/Spinner';
+import InfoCard from '../../components/InfoCard';
 
 const EditBettingMachinePage = (props) => {
   const [bettingMachine, setBettingMachine] = useState({});
@@ -55,9 +56,24 @@ const EditBettingMachinePage = (props) => {
         <ArrowLeftShort className='me-2' size={24} />
         Idi nazad
       </Button>
-      <h2 className='mb-4 text-primary'>Uredi kladomat {bettingMachine && bettingMachine.place}</h2>
       {error && <Alert variant='danger'>{error}</Alert>}
-      <BettingMachineForm defaultValues={bettingMachine} onSubmit={onSubmit} submitLoading={submitLoading} />
+      {bettingMachine && (
+        <>
+          <h2 className='mb-4 text-primary'>Uredi kladomat {bettingMachine && bettingMachine.place}</h2>
+          <Row>
+            <Col md='6'>
+              <BettingMachineForm defaultValues={bettingMachine} onSubmit={onSubmit} submitLoading={submitLoading} />
+            </Col>
+            <Col md={{ span: 4, offset: 2 }}>
+              <InfoCard
+                createdAt={bettingMachine.createdAt}
+                updatedAt={bettingMachine.updatedAt}
+                userFullName={bettingMachine.userFullName}
+              />
+            </Col>
+          </Row>
+        </>
+      )}
     </div>
   );
 };

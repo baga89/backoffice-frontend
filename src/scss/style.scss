@@ -134,8 +134,6 @@ header {
   grid-area: topbar;
   display: flex;
   justify-content: space-between;
-  padding-left: 24px;
-  padding-right: 24px;
   height: 60px;
   border-bottom: 1px solid var(--gray-border);
   background-color: var(--white);
@@ -177,7 +175,8 @@ header {
    ========================================================================== */
 main {
   grid-area: main;
-  padding: 24px;
+  padding-top: 24px;
+  padding-bottom: 24px;
   background-color: var(--bs-light);
   overflow-y: auto;
 }
@@ -199,8 +198,10 @@ footer {
   background: transparent;
 }
 
-.grid-template-columns-2 {
-  grid-template-columns: repeat(2, 1fr);
+.fav-container {
+  width: 100%;
+  padding-left: 24px;
+  padding-right: 24px;
 }
 
 // Spinner

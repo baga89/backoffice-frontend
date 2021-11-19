@@ -60,7 +60,7 @@ const OfficesPage = (props) => {
   if (loading) return <Spinner />;
 
   return (
-    <div className='fav-container'>
+    <>
       <h1 className='mb-4'>Poslovnice</h1>
       <Card className='shadow-sm'>
         <Card.Header as='h5'>
@@ -140,7 +140,7 @@ const OfficesPage = (props) => {
         </Modal.Footer>
       </Modal>
       {/* <Pagination itemsCount={this.state.offices.length} pageSize={this.state.pageSize} /> */}
-    </div>
+    </>
   );
 };
 
