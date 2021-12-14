@@ -7,6 +7,11 @@ export const getOffices = async () => {
   return offices;
 };
 
+export const getOfficesCount = async () => {
+  const { data: officesCount } = await api.get(API_URL + 'count');
+  return officesCount;
+};
+
 export const getOffice = async (id) => {
   const { data: office } = await api.get(API_URL + id);
   return office;

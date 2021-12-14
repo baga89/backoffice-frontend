@@ -7,6 +7,11 @@ export const getBettingMachines = async () => {
   return bettingMachines;
 };
 
+export const getBettingMachinesCount = async () => {
+  const { data: bettingMachinesCount } = await api.get(API_URL + 'count');
+  return bettingMachinesCount;
+};
+
 export const getBettingMachine = async (id) => {
   const { data: bettingMachine } = await api.get(API_URL + id);
   return bettingMachine;

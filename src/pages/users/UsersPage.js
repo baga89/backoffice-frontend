@@ -79,7 +79,7 @@ const UsersPage = (props) => {
             </Col>
           </Row>
         </Card.Header>
-        <table className='table'>
+        <table className='table mb-0'>
           <thead className='table-light'>
             <tr>
               <th scope='col'>#</th>

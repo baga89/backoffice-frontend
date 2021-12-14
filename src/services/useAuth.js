@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext, createContext } from 'react';
+import React, { useState, useEffect, createContext, useContext } from 'react';
 import api from './api';
 import { setTokenHeader } from './api';
 
@@ -6,6 +6,15 @@ const API_URL = 'auth/';
 const TOKEN = 'token';
 
 const authContext = createContext();
+
+export function AuthProvider({ children }) {
+  const auth = useAuthProvider();
+  return <authContext.Provider value={auth}>{children}</authContext.Provider>;
+}
+
+export function useAuth() {
+  return useContext(authContext);
+}
 
 function useAuthProvider() {
   const [token, setToken] = useState(getToken());
@@ -82,13 +91,4 @@ function useAuthProvider() {
     updateUser,
     updatePassword,
   };
-}
-
-export function AuthProvider({ children }) {
-  const auth = useAuthProvider();
-  return <authContext.Provider value={auth}>{children}</authContext.Provider>;
-}
-
-export function useAuth() {
-  return useContext(authContext);
 }
